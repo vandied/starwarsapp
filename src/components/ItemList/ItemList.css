@@ -1,18 +1,18 @@
-.itemList{
-  background-color: #444;
-  border-radius: 3px;
-  width:30%;
-  margin:10px;
+.itemList {
+	background-color: #444;
+	border-radius: 3px;
+	width: 30%;
+	margin: 10px;
 }
 
-.listGroup{
-  padding-left: 0;
-  margin: 0;
+.listGroup {
+	padding-left: 0;
+	margin: 0;
 }
 
-.listGroupItem{
-  margin:0;
-  list-style: none;
-  padding: 10px;
-  cursor: pointer;
+.listGroupItem {
+	margin: 0;
+	list-style: none;
+	padding: 10px;
+	cursor: pointer;
 }
