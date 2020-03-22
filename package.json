@@ -17,10 +17,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --use-tabs --trailing-comma es5 --write \"src/**/*.{ts,js,json,scss,css,jsx,tsx,html}\""
+    "prettier": "prettier --single-quote--trailing-comma es5 --write \"src/**/*.{ts,js,json,scss,css,jsx,tsx,html}\""
   },
   "lint-staged": {
-    "src/**/*.js": ["prettier --single-quote --use-tabs --trailing-comma es6 --write",
+    "src/**/*.js": ["prettier --single-quote --trailing-comma es6 --write",
     "git add"]},
 
   "eslintConfig": {

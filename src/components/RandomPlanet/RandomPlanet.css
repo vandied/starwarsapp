@@ -1,13 +1,13 @@
 .randomPlanet {
-	display: flex;
-	padding: 10px;
-	margin: 15px;
-	background-color: #444;
+  display: flex;
+  padding: 10px;
+  margin: 15px;
+  background-color: #444;
 }
-.planetImg {
-	width: 150px;
-	height: 150px;
-	background-color: crimson;
-	border-radius: 10px;
-	margin-right: 15px;
+.planetImg img {
+  width: 150px;
+  height: 150px;
+  background-color: crimson;
+  border-radius: 10px;
+  margin-right: 15px;
 }
