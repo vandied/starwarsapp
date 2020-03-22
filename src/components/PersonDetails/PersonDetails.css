@@ -25,3 +25,7 @@
   border-radius: 3px;
   cursor: pointer;
 }
+
+.spinner {
+  margin: 0 auto;
+}
