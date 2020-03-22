@@ -7,11 +7,12 @@ export default class RandomPlanet extends Component {
   swapiService = new SwapiService();
 
   state = {
-    planet: {}
+    planet: {},
+    loading: true
   };
 
   onPlanetLoaded = planet => {
-    this.setState({ planet });
+    this.setState({ planet, loading: false });
   };
 
   updatePlanet() {
@@ -26,35 +27,46 @@ export default class RandomPlanet extends Component {
   }
 
   render() {
-    const {
-      planet: { id, name, population, rotationperiod, diameter }
-    } = this.state;
+    const { planet, loading } = this.state;
     return (
       <div className="randomPlanet">
-        {/*<div className='spinner'>*/}
-        {/*<Spinner/>*/}
-        {/*</div>*/}
-        <div className="planetImg">
-          <img
-            src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-            alt="planetImg"
-          />
-        </div>
-        <div className="planetDescription">
-          <h2 className="planetName">{name}</h2>
-          <div className="list-group">
-            <div>
-              Population <span>{population}</span>
-            </div>
-            <div>
-              Rotation Period <span>{rotationperiod}</span>
-            </div>
-            <div>
-              Diameter <span>{diameter}</span>
-            </div>
+        {loading ? (
+          <div className="spinner">
+            <Spinner />
           </div>
-        </div>
+        ) : (
+          <PlanetView planet={planet} />
+        )}
       </div>
     );
   }
 }
+
+const PlanetView = ({ planet }) => {
+  const { id, name, population, rotationperiod, diameter } = planet;
+
+  return (
+    <React.Fragment>
+      <div className="planetImg">
+        <img
+          src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+          alt="planetImg"
+        />
+      </div>
+      <div className="planetDescription">
+        <h2 className="planetName">{name}</h2>
+        <div className="list-group">
+          <div>
+            Population <span>{population}</span>
+          </div>
+          <div>
+            Rotation Period <span>{rotationperiod}</span>
+          </div>
+          <div>
+            Diameter <span>{diameter}</span>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
