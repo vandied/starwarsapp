@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote--trailing-comma es5 --write \"src/**/*.{ts,js,json,scss,css,jsx,tsx,html}\""
+    "fix": "prettier --single-quote --tab-width 2  --trailing-comma es5 --write \"src/**/*.{ts,js,json,scss,css,jsx,tsx,html}\""
   },
   "lint-staged": {
     "src/**/*.js": ["prettier --single-quote --trailing-comma es6 --write",
