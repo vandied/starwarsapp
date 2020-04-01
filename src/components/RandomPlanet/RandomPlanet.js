@@ -1,13 +1,17 @@
-import React, { Component } from "react";
-import "./RandomPlanet.css";
-import SwapiService from "../../services/swapi-service";
-import Spinner from "../Spinner/Spinner";
-import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
+import React, { Component } from 'react';
+import './RandomPlanet.css';
+import SwapiService from '../../services/swapi-service';
+import Spinner from '../Spinner/Spinner';
+import ErrorIndicator from '../ErrorIndicator/ErrorIndicator';
 
 export default class RandomPlanet extends Component {
-  constructor() {
-    super();
+  componentDidMount() {
     this.updatePlanet();
+    this.interval = setInterval(this.updatePlanet, 22500);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   swapiService = new SwapiService();
@@ -15,21 +19,20 @@ export default class RandomPlanet extends Component {
   state = {
     planet: {},
     loading: true,
-    error: false
+    error: false,
   };
 
   onPlanetLoaded = planet => {
-    this.setState({ planet, loading: false });
+    this.setState({ planet, loading: false, error: false });
   };
 
-  updatePlanet() {
-    // const id = Math.floor(Math.random() * 25) + 2;
-    const id = 9;
+  updatePlanet = () => {
+    const id = Math.floor(Math.random() * 25) + 3;
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
       .catch(this.onError);
-  }
+  };
 
   onError = err => {
     this.setState({ error: true, loading: false });
@@ -64,7 +67,7 @@ const PlanetView = ({ planet }) => {
       <div className="planetImg">
         <img
           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-          alt="planetImg"
+          alt="planet"
         />
       </div>
       <div className="planetDescription">
