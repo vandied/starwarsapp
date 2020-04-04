@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './RandomPlanet.css';
-import SwapiService from '../../services/swapi-service';
-import Spinner from '../Spinner/Spinner';
-import ErrorIndicator from '../ErrorIndicator/ErrorIndicator';
+import React, { Component } from "react";
+import "./RandomPlanet.css";
+import SwapiService from "../../services/swapi-service";
+import Spinner from "../Spinner/Spinner";
+import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 
 export default class RandomPlanet extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ export default class RandomPlanet extends Component {
   state = {
     planet: {},
     loading: true,
-    error: false,
+    error: false
   };
 
   onPlanetLoaded = planet => {

@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import './PersonDetails.css';
-import SwapiService from '../../services/swapi-service';
-import Spinner from '../Spinner/Spinner';
+import React, { Component } from "react";
+import "./PersonDetails.css";
+import SwapiService from "../../services/swapi-service";
+import Spinner from "../Spinner/Spinner";
 
 export default class PersonDetails extends Component {
   state = {
-    person: null,
+    person: null
   };
   swapiService = new SwapiService();
 
   componentDidMount() {
     this.updatePerson();
   }
+
   componentDidUpdate(prevProps) {
     if (this.props.personId !== prevProps.personId) {
       this.setState({ person: null });
