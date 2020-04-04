@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./RandomPlanet.css";
 import SwapiService from "../../services/swapi-service";
-import Spinner from "../Spinner/Spinner";
-import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
+import Spinner from "../Spinner";
+import ErrorIndicator from "../ErrorIndicator";
 
 export default class RandomPlanet extends Component {
   componentDidMount() {
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 22500);
+    this.interval = setInterval(this.updatePlanet, 3500);
   }
 
   componentWillUnmount() {
@@ -60,29 +60,30 @@ export default class RandomPlanet extends Component {
 }
 
 const PlanetView = ({ planet }) => {
-  const { id, name, population, rotationperiod, diameter } = planet;
+  const { id, name, population, rotationPeriod, diameter } = planet;
 
   return (
     <React.Fragment>
-      <div className="planetImg">
+      <div className="randomPlanet_img">
         <img
+          className="img"
           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
           alt="planet"
         />
       </div>
-      <div className="planetDescription">
-        <h2 className="planetName">{name}</h2>
-        <div className="list-group">
-          <div>
+      <div className="randomPlanet_description">
+        <h2 className="name">{name}</h2>
+        <ul className="list-group">
+          <li className="list-group-item">
             Population <span>{population}</span>
-          </div>
-          <div>
-            Rotation Period <span>{rotationperiod}</span>
-          </div>
-          <div>
+          </li>
+          <li className="list-group-item">
+            Rotation Period <span>{rotationPeriod}</span>
+          </li>
+          <li className="list-group-item">
             Diameter <span>{diameter}</span>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </React.Fragment>
   );

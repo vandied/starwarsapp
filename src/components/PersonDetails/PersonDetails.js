@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./PersonDetails.css";
 import SwapiService from "../../services/swapi-service";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../Spinner";
 
 export default class PersonDetails extends Component {
   state = {
@@ -46,14 +46,14 @@ export default class PersonDetails extends Component {
           <h4>
             {name} {this.props.personId}
           </h4>
-          <ul className="detailsList">
-            <li className="detailsListItem">
+          <ul className="list-group">
+            <li className="list-group-item">
               Gender <span>{gender}</span>
             </li>
-            <li className="detailsListItem">
+            <li className="list-group-item">
               Birth <span>{birthYear}</span>
             </li>
-            <li className="detailsListItem">
+            <li className="list-group-item">
               Eye Color <span>{eyeColor}</span>
             </li>
           </ul>

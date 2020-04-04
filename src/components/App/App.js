@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "../Header/Header";
-import RandomPlanet from "../RandomPlanet/RandomPlanet";
-import ErrorButton from "../ErrorButton/ErrorButton";
-import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
-import PeoplePage from "../PeoplePage/PeoplePage";
-import ItemList from "../ItemList/ItemList";
+import RandomPlanet from "../RandomPlanet";
+import ErrorButton from "../ErrorButton";
+import ErrorIndicator from "../ErrorIndicator";
+import PeoplePage from "../PeoplePage";
+import ItemList from "../ItemList";
 import SwapiService from "../../services/swapi-service";
-
+import TogglePlanet from "../TogglePlanet";
 export default class App extends Component {
   state = {
     showRandomPlanet: true,
@@ -35,18 +35,19 @@ export default class App extends Component {
       <div className="app">
         <Header />
         {randomPlanet}
-        <button className="togglePlanetBtn" onClick={this.onToggleRandomPlanet}>
-          Toggle Random Planet
-        </button>
-        <ErrorButton />
+        <div className="buttonBlock">
+          <TogglePlanet onTogglePlanet={this.onToggleRandomPlanet} />
+          <ErrorButton />
+        </div>
         <PeoplePage />
         <div className="row mb2">
           <div className="col-md-6">
             <ItemList
               onItemSelected={this.onPersonSelected}
               getData={this.swapiService.getAllPlanets}
-              renderItem={item => item.name}
-            />
+            >
+              {i => i.name}
+            </ItemList>
           </div>
         </div>
         <div className="row mb2">
@@ -54,8 +55,9 @@ export default class App extends Component {
             <ItemList
               onItemSelected={this.onPersonSelected}
               getData={this.swapiService.getAllStarships}
-              renderItem={item => item.name}
-            />
+            >
+              {i => i.name}
+            </ItemList>
           </div>
         </div>
       </div>
