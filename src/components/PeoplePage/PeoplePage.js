@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ItemList from "../ItemList";
-import PersonDetails from "../PersonDetails";
+import ItemDetails from "../ItemDetails";
 import ErrorIndicator from "../ErrorIndicator";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundary from "../ErrorBoundary";
@@ -36,9 +36,7 @@ export default class PeoplePage extends Component {
       </ItemList>
     );
 
-    const personDetails = (
-      <PersonDetails personId={this.state.selectedPerson} />
-    );
+    const personDetails = <ItemDetails personId={this.state.selectedPerson} />;
 
     return (
       <ErrorBoundary>
