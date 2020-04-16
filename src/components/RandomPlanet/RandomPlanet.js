@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./RandomPlanet.css";
-import SwapiService from "../../services/swapi-service";
+import MovieService from "../../services/movie-service";
 import Spinner from "../Spinner";
 import ErrorIndicator from "../ErrorIndicator";
 
@@ -14,7 +14,7 @@ export default class RandomPlanet extends Component {
     clearInterval(this.interval);
   }
 
-  swapiService = new SwapiService();
+  swapiService = new MovieService();
 
   state = {
     planet: {},

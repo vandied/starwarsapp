@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ItemList from "../ItemList";
 import ItemDetails from "../ItemDetails";
 import ErrorIndicator from "../ErrorIndicator";
-import SwapiService from "../../services/swapi-service";
+import MovieService from "../../services/swapi-service";
 import ErrorBoundary from "../ErrorBoundary";
 import Row from "../Row";
 
@@ -12,7 +12,7 @@ export default class PeoplePage extends Component {
     hasError: false
   };
 
-  swapiService = new SwapiService();
+  swapiService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });

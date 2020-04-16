@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import RandomPlanet from "../RandomPlanet";
 import ErrorButton from "../ErrorButton";
 import ErrorIndicator from "../ErrorIndicator";
-import SwapiService from "../../services/swapi-service";
+import MovieService from "../../services/movie-service";
 import TogglePlanet from "../TogglePlanet";
 import ItemDetails from "../ItemDetails";
 import Row from "../Row";
@@ -13,10 +13,14 @@ export default class App extends Component {
     showRandomPlanet: true,
     hasError: false
   };
-  swapiService = new SwapiService();
+  swapiService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });
+  }
+
+  componentDidMount() {
+    this.swapiService.getPopularMovies();
   }
 
   onToggleRandomPlanet = () => {
@@ -27,30 +31,30 @@ export default class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
-    const randomPlanet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-    const personDetails = (
-      <ItemDetails
-        itemId={11}
-        getData={this.swapiService.getPerson}
-        getImgUrl={this.swapiService.getPersonImage(11)}
-      />
-    );
-    const starshipDetails = (
-      <ItemDetails
-        itemId={5}
-        getData={this.swapiService.getStarship}
-        getImgUrl={this.swapiService.getStarshipImage(5)}
-      />
-    );
+    // const randomPlanet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+    // const personDetails = (
+    //   <ItemDetails
+    //     itemId={11}
+    //     getData={this.swapiService.getPerson}
+    //     getImgUrl={this.swapiService.getPersonImage(11)}
+    //   />
+    // );
+    // const starshipDetails = (
+    //   <ItemDetails
+    //     itemId={5}
+    //     getData={this.swapiService.getStarship}
+    //     getImgUrl={this.swapiService.getStarshipImage(5)}
+    //   />
+    // );
     return (
       <div className="app">
         <Header />
-        {randomPlanet}
-        <div className="buttonBlock">
-          <TogglePlanet onTogglePlanet={this.onToggleRandomPlanet} />
-          <ErrorButton />
-        </div>
-        <Row left={personDetails} right={starshipDetails} />
+        {/*{randomPlanet}*/}
+        {/*<div className="buttonBlock">*/}
+        {/*  <TogglePlanet onTogglePlanet={this.onToggleRandomPlanet} />*/}
+        {/*  <ErrorButton />*/}
+        {/*</div>*/}
+        {/*<Row left={personDetails} right={starshipDetails} />*/}
       </div>
     );
   }
