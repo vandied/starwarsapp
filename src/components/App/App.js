@@ -8,6 +8,7 @@ import MovieService from "../../services/movie-service";
 import ToggleMovie from "../ToggleMovie";
 import ItemDetails from "../ItemDetails";
 import Row from "../Row";
+import PeoplePage from "../PeoplePage";
 export default class App extends Component {
   state = {
     showRandomMovie: true,
@@ -38,13 +39,15 @@ export default class App extends Component {
         )}
       />
     );
-    // const starshipDetails = (
-    //   <ItemDetails
-    //     itemId={5}
-    //     getData={this.swapiService.getStarship}
-    //     getImgUrl={this.swapiService.getStarshipImage(5)}
-    //   />
-    // );
+    const movieDetails = (
+      <ItemDetails
+        itemId={555}
+        getData={this.movieService.getMovie}
+        getImgUrl={this.movieService.getImage(
+          "hjgSkUa3KjSYc8ZQhFRrqSF9cgX.jpg"
+        )}
+      />
+    );
     return (
       <div className="app">
         <Header />
@@ -53,7 +56,8 @@ export default class App extends Component {
           <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
           <ErrorButton />
         </div>
-        <Row left={personDetails} right={<div />} />
+        <PeoplePage />
+        <Row left={personDetails} right={movieDetails} />
       </div>
     );
   }

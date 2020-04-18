@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ItemList from "../ItemList";
 import ItemDetails from "../ItemDetails";
 import ErrorIndicator from "../ErrorIndicator";
-import MovieService from "../../services/swapi-service";
+import MovieService from "../../services/movie-service";
 import ErrorBoundary from "../ErrorBoundary";
 import Row from "../Row";
 
@@ -12,7 +12,7 @@ export default class PeoplePage extends Component {
     hasError: false
   };
 
-  swapiService = new MovieService();
+  movieService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });
@@ -30,13 +30,21 @@ export default class PeoplePage extends Component {
     const itemList = (
       <ItemList
         onItemSelected={this.onPersonSelected}
-        getData={this.swapiService.getAllPeople}
+        getData={this.movieService.getPopularPeople}
       >
-        {i => `${i.name} (${i.gender}, ${i.birthYear})`}
+        {i => `${i.name}`}
       </ItemList>
     );
 
-    const personDetails = <ItemDetails personId={this.state.selectedPerson} />;
+    const personDetails = (
+      <ItemDetails
+        personId={this.state.selectedPerson}
+        getData={this.movieService.getPerson}
+        getImgUrl={this.movieService.getImage(
+          "hjgSkUa3KjSYc8ZQhFRrqSF9cgX.jpg"
+        )}
+      />
+    );
 
     return (
       <ErrorBoundary>
