@@ -50,7 +50,7 @@ export default class RandomMovie extends Component {
     const content = hasData ? <MovieView movie={movie} /> : null;
     const errorMessage = error ? <ErrorIndicator /> : null;
     return (
-      <div className="randomMoviet">
+      <div className="randomMovie">
         {loader}
         {errorMessage}
         {content}

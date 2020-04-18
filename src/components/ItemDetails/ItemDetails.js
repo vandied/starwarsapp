@@ -32,25 +32,23 @@ export default class ItemDetails extends Component {
     if (!this.state.item) {
       return <Spinner />;
     }
-    const { name, gender, birthYear, eyeColor } = item;
+    const { name } = item;
     return (
-      <div className="person">
-        <div className="personImg">
+      <div className="item">
+        <div className="itemImg">
           <img src={image} alt="characters" />
         </div>
-        <div className="personDetails">
-          <h4>
-            {name} {this.props.itemId}
-          </h4>
+        <div className="itemDetails">
+          <h4>{name}</h4>
           <ul className="list-group">
             <li className="list-group-item">
-              Gender <span>{gender}</span>
+              {/*Gender <span>{gender}</span>*/}
             </li>
             <li className="list-group-item">
-              Birth <span>{birthYear}</span>
+              {/*Birth <span>{birthYear}</span>*/}
             </li>
             <li className="list-group-item">
-              Eye Color <span>{eyeColor}</span>
+              {/*Eye Color <span>{eyeColor}</span>*/}
             </li>
           </ul>
         </div>

@@ -5,7 +5,7 @@ import RandomMovie from "../RandomMovie";
 import ErrorButton from "../ErrorButton";
 import ErrorIndicator from "../ErrorIndicator";
 import MovieService from "../../services/movie-service";
-import TogglePlanet from "../TogglePlanet";
+import ToggleMovie from "../ToggleMovie";
 import ItemDetails from "../ItemDetails";
 import Row from "../Row";
 export default class App extends Component {
@@ -13,13 +13,14 @@ export default class App extends Component {
     showRandomMovie: true,
     hasError: false
   };
-  swapiService = new MovieService();
+  movieService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });
   }
 
   onToggleRandomMovie = () => {
+    console.log(this.state.showRandomMovie);
     this.setState({ showRandomMovie: !this.state.showRandomMovie });
   };
 
@@ -28,13 +29,15 @@ export default class App extends Component {
       return <ErrorIndicator />;
     }
     const randomMovie = this.state.showRandomMovie ? <RandomMovie /> : null;
-    // const personDetails = (
-    //   <ItemDetails
-    //     itemId={11}
-    //     getData={this.swapiService.getPerson}
-    //     getImgUrl={this.swapiService.getPersonImage(11)}
-    //   />
-    // );
+    const personDetails = (
+      <ItemDetails
+        itemId={2552}
+        getData={this.movieService.getPerson}
+        getImgUrl={this.movieService.getImage(
+          "hjgSkUa3KjSYc8ZQhFRrqSF9cgX.jpg"
+        )}
+      />
+    );
     // const starshipDetails = (
     //   <ItemDetails
     //     itemId={5}
@@ -46,11 +49,11 @@ export default class App extends Component {
       <div className="app">
         <Header />
         {randomMovie}
-        {/*<div className="buttonBlock">*/}
-        {/*  <TogglePlanet onTogglePlanet={this.onToggleRandomPlanet} />*/}
-        {/*  <ErrorButton />*/}
-        {/*</div>*/}
-        {/*<Row left={personDetails} right={starshipDetails} />*/}
+        <div className="buttonBlock">
+          <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
+          <ErrorButton />
+        </div>
+        <Row left={personDetails} right={<div />} />
       </div>
     );
   }
