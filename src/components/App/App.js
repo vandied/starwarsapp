@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "../Header/Header";
-import RandomPlanet from "../RandomPlanet";
+import RandomMovie from "../RandomMovie";
 import ErrorButton from "../ErrorButton";
 import ErrorIndicator from "../ErrorIndicator";
 import MovieService from "../../services/movie-service";
@@ -10,7 +10,7 @@ import ItemDetails from "../ItemDetails";
 import Row from "../Row";
 export default class App extends Component {
   state = {
-    showRandomPlanet: true,
+    showRandomMovie: true,
     hasError: false
   };
   swapiService = new MovieService();
@@ -19,19 +19,15 @@ export default class App extends Component {
     this.setState({ hasError: true });
   }
 
-  componentDidMount() {
-    this.swapiService.getPopularMovies();
-  }
-
-  onToggleRandomPlanet = () => {
-    this.setState({ showRandomPlanet: !this.state.showRandomPlanet });
+  onToggleRandomMovie = () => {
+    this.setState({ showRandomMovie: !this.state.showRandomMovie });
   };
 
   render() {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
-    // const randomPlanet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+    const randomMovie = this.state.showRandomMovie ? <RandomMovie /> : null;
     // const personDetails = (
     //   <ItemDetails
     //     itemId={11}
@@ -49,7 +45,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <Header />
-        {/*{randomPlanet}*/}
+        {randomMovie}
         {/*<div className="buttonBlock">*/}
         {/*  <TogglePlanet onTogglePlanet={this.onToggleRandomPlanet} />*/}
         {/*  <ErrorButton />*/}

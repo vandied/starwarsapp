@@ -1,10 +1,10 @@
 export default class MovieService {
-  _apiBase = "https://api.themoviedb.org/";
-  // _imageBase = "https://starwars-visualguide.com/assets/img/";
+  _apiBase = "https://api.themoviedb.org/3/";
+  _imageBase = "http://image.tmdb.org/t/p/w500/";
 
   getResource = async url => {
     const res = await fetch(
-      `${this._apiBase}${url}?api_key=fb1052fd5ba33a6831443d694b9c759e`
+      `${this._apiBase}${url}api_key=fb1052fd5ba33a6831443d694b9c759e`
     );
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}, received ${res.status}`);
@@ -13,94 +13,64 @@ export default class MovieService {
   };
 
   getPopularMovies = async () => {
-    const res = await this.getResource("3/movie/popular");
-    return await res.result;
+    const res = await this.getResource("movie/popular?page=1&");
+    return await res.results.map(this._transformMovie);
   };
 
-  // getResource = async url => {
-  //   const res = await fetch(`${this._apiBase}${url}`);
-  //   if (!res.ok) {
-  //     throw new Error(`Could not fetch ${url}, received ${res.status}`);
-  //   }
-  //   return await res.json();
-  // };
-  //
-  // getAllPeople = async () => {
-  //   const res = await this.getResource(`/people/`);
-  //   return res.results.map(this._transformPerson);
-  // };
-  //
-  // getPerson = async id => {
-  //   const person = await this.getResource(`/people/${id}/`);
-  //   return this._transformPerson(person);
-  // };
-  //
-  // getAllPlanets = async () => {
-  //   const res = await this.getResource(`/planets/`);
-  //   return res.results.map(this._transformPlanet);
-  // };
-  //
-  // getPlanet = async id => {
-  //   const planet = await this.getResource(`/planets/${id}/`);
-  //   return this._transformPlanet(planet);
-  // };
-  //
-  // getAllStarships = async () => {
-  //   const res = await this.getResource(`/starships/`);
-  //   return res.results.map(this._transformStarship);
-  // };
-  //
-  // getStarship = async id => {
-  //   const starhip = await this.getResource(`/starships/${id}/`);
-  //   return this._transformStarship(starhip);
-  // };
-  //
-  // _extractId = item => {
-  //   const idRegexp = /\/([0-9])*\/$/;
-  //   return item.url.match(idRegexp)[1];
-  // };
-  //
-  // _transformPlanet = planet => {
-  //   return {
-  //     id: this._extractId(planet),
-  //     name: planet.name,
-  //     population: planet.population,
-  //     rotationPeriod: planet.rotation_period,
-  //     diameter: planet.diameter
-  //   };
-  // };
-  // _transformStarship = starship => {
-  //   return {
-  //     id: this._extractId(starship),
-  //     name: starship.name,
-  //     model: starship.model,
-  //     manufacturer: starship.manufacturer,
-  //     costInCredits: starship.costInCredits,
-  //     length: starship.length,
-  //     crew: starship.crew,
-  //     passengers: starship.passengers,
-  //     cargoCapacity: starship.cargoCapacity
-  //   };
-  // };
-  // _transformPerson = person => {
-  //   return {
-  //     id: this._extractId(person),
-  //     name: person.name,
-  //     gender: person.gender,
-  //     birthYear: person.birth_year,
-  //     eyeColor: person.eye_color
-  //   };
-  // };
-  //
-  // getPersonImage = id => {
-  //   return `${this._imageBase}characters/${id}.jpg`;
-  // };
-  //
-  // getStarshipImage = id => {
-  //   return `${this._imageBase}starships/${id}.jpg`;
-  // };
-  //
-  // getPlanetImage = id => {
-  //   return `${this._imageBase}planets/${id}.jpg`;
-  // };
+  getMovie = async id => {
+    const movie = await this.getResource(`movie/${id}?`);
+    return this._transformMovie(movie);
+  };
+
+  getPopularPeople = async () => {
+    const res = await this.getResource("person/popular?page=1&");
+    return await res.results.map(this._transformPeople);
+  };
+
+  getPerson = async id => {
+    const person = await this.getResource(`person/${id}?`);
+    return this._transformPeople(person);
+  };
+
+  getPopularTV = async () => {
+    const res = await this.getResource("tv/popular?page=1&");
+    return await res.results.map(this._transformTV);
+  };
+
+  getTV = async id => {
+    const tv = await this.getResource(`tv/${id}?`);
+    return this._transformTV(tv);
+  };
+
+  _transformMovie = movie => {
+    return {
+      id: movie.id,
+      title: movie.title,
+      poster: movie.poster_path,
+      popularity: movie.popularity,
+      overview: movie.overview,
+      homepage: movie.homepage
+    };
+  };
+  _transformPeople = person => {
+    return {
+      id: person.id,
+      name: person.name,
+      posterUrl: person.poster_path,
+      popularity: person.popularity
+    };
+  };
+
+  _transformTV = person => {
+    return {
+      id: person.id,
+      name: person.name,
+      posterUrl: person.poster_path,
+      popularity: person.popularity
+    };
+  };
+
+  getImage = path => {
+    return `${this._imageBase}${path}`;
+  };
 }

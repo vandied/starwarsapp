@@ -1,21 +1,21 @@
-import React from 'react';
-import './Header.css';
+import React from "react";
+import "./Header.css";
 
 const Header = () => {
   return (
     <div className="header d-flex">
       <h3>
-        <a href="#">Star DB</a>
+        <a href="#">Movie searching</a>
       </h3>
       <ul className="d-flex">
         <li>
-          <a href="#"> People</a>
+          <a href="#">Movies</a>
         </li>
         <li>
-          <a href="#">Planet</a>
+          <a href="#">TV</a>
         </li>
         <li>
-          <a href="#">Starship</a>
+          <a href="#">People</a>
         </li>
       </ul>
     </div>
