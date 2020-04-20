@@ -21,7 +21,6 @@ export default class App extends Component {
   }
 
   onToggleRandomMovie = () => {
-    console.log(this.state.showRandomMovie);
     this.setState({ showRandomMovie: !this.state.showRandomMovie });
   };
 
