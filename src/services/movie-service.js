@@ -46,27 +46,32 @@ export default class MovieService {
     return {
       id: movie.id,
       title: movie.title,
-      poster: movie.poster_path,
+      posterUrl: movie.poster_path,
       popularity: movie.popularity,
       overview: movie.overview,
-      homepage: movie.homepage
+      homepage: movie.homepage,
+      tagline: movie.tagline
     };
   };
   _transformPeople = person => {
     return {
       id: person.id,
       name: person.name,
-      posterUrl: person.poster_path,
-      popularity: person.popularity
+      posterUrl: person.profile_path,
+      popularity: person.popularity,
+      knownAs: person.also_known_as,
+      birthday: person.birthday,
+      biography: person.biography,
+      gender: person.gender
     };
   };
 
-  _transformTV = person => {
+  _transformTV = tv => {
     return {
-      id: person.id,
-      name: person.name,
-      posterUrl: person.poster_path,
-      popularity: person.popularity
+      id: tv.id,
+      name: tv.name,
+      posterUrl: tv.poster_path,
+      popularity: tv.popularity
     };
   };
 

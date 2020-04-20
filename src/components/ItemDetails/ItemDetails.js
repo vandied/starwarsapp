@@ -2,9 +2,20 @@ import React, { Component } from "react";
 import "./ItemDetails.css";
 import Spinner from "../Spinner";
 
+const Record = ({ item, field, label }) => {
+  console.log(item);
+  return (
+    <li className="list-group-item">
+      <span className="term">{label} </span>
+      <span>{item[field]}</span>
+    </li>
+  );
+};
+export { Record };
 export default class ItemDetails extends Component {
   state = {
-    item: null
+    item: null,
+    image: null
   };
 
   componentDidMount() {
@@ -24,7 +35,7 @@ export default class ItemDetails extends Component {
       return;
     }
     getData(itemId).then(item => {
-      this.setState({ item, image: getImgUrl });
+      this.setState({ item, image: getImgUrl(item.posterUrl) });
     });
   };
   render() {
@@ -32,24 +43,18 @@ export default class ItemDetails extends Component {
     if (!this.state.item) {
       return <Spinner />;
     }
-    const { name } = item;
+    const { name, title } = item;
     return (
       <div className="item">
         <div className="itemImg">
           <img src={image} alt="characters" />
         </div>
         <div className="itemDetails">
-          <h4>{name}</h4>
+          <h4>{name || title}</h4>
           <ul className="list-group">
-            <li className="list-group-item">
-              {/*Gender <span>{gender}</span>*/}
-            </li>
-            <li className="list-group-item">
-              {/*Birth <span>{birthYear}</span>*/}
-            </li>
-            <li className="list-group-item">
-              {/*Eye Color <span>{eyeColor}</span>*/}
-            </li>
+            {React.Children.map(this.props.children, child => {
+              return React.cloneElement(child, { item });
+            })}
           </ul>
         </div>
       </div>
