@@ -8,7 +8,7 @@ import Row from "../Row";
 
 export default class PeoplePage extends Component {
   state = {
-    selectedPerson: 3,
+    selectedPerson: 1910848,
     hasError: false
   };
 
@@ -38,7 +38,7 @@ export default class PeoplePage extends Component {
 
     const personDetails = (
       <ItemDetails
-        personId={this.state.selectedPerson}
+        itemId={this.state.selectedPerson}
         getData={this.movieService.getPerson}
         getImgUrl={this.movieService.getImage(
           "hjgSkUa3KjSYc8ZQhFRrqSF9cgX.jpg"

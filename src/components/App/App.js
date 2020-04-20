@@ -41,7 +41,7 @@ export default class App extends Component {
     );
     const movieDetails = (
       <ItemDetails
-        itemId={555}
+        itemId={212833}
         getData={this.movieService.getMovie}
         getImgUrl={this.movieService.getImage(
           "hjgSkUa3KjSYc8ZQhFRrqSF9cgX.jpg"
