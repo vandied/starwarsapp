@@ -9,6 +9,8 @@ import ToggleMovie from "../ToggleMovie";
 import ItemDetails from "../ItemDetails";
 import Row from "../Row";
 import { Record } from "../ItemDetails/ItemDetails";
+import ItemList from "../ItemList/ItemList";
+import PeoplePage from "../PeoplePage";
 export default class App extends Component {
   state = {
     showRandomMovie: true,
@@ -55,6 +57,7 @@ export default class App extends Component {
           <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
           <ErrorButton />
         </div>
+        <PeoplePage />
         <Row left={personDetails} right={movieDetails} />
       </div>
     );

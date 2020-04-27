@@ -5,6 +5,7 @@ import ErrorIndicator from "../ErrorIndicator";
 import MovieService from "../../services/movie-service";
 import ErrorBoundary from "../ErrorBoundary";
 import Row from "../Row";
+import { Record } from "../ItemDetails/ItemDetails";
 
 export default class PeoplePage extends Component {
   state = {
@@ -40,10 +41,14 @@ export default class PeoplePage extends Component {
       <ItemDetails
         itemId={this.state.selectedPerson}
         getData={this.movieService.getPerson}
-        getImgUrl={this.movieService.getImage(
-          "hjgSkUa3KjSYc8ZQhFRrqSF9cgX.jpg"
-        )}
-      />
+        getImgUrl={this.movieService.getImage}
+      >
+        <Record field="popularity" label="Popularity" />
+        <Record field="gender" label="Gender" />
+        <Record field="birthday" label="Birthday" />
+        <Record field="knownAs" label="Also known as" />
+        <Record field="biography" label="biography" />
+      </ItemDetails>
     );
 
     return (
