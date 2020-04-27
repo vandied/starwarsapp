@@ -1,42 +1,30 @@
 import React, { Component } from "react";
 import "./ItemList.css";
-import Spinner from "../Spinner";
+import MovieService from "../../services/movie-service";
+import withData from "../HOCHelpers/withData";
 
-export default class ItemList extends Component {
-  state = {
-    itemList: null
-  };
-
-  componentDidMount() {
-    const { getData } = this.props;
-    getData().then(itemList => {
-      this.setState({ itemList });
-    });
-  }
-  renderItems(arr) {
-    return arr.map(item => {
-      const { id } = item;
-      const label = this.props.children(item);
-      return (
-        <li
-          className="list-group-item"
-          key={id}
-          onClick={() => this.props.onItemSelected(id)}
-        >
-          {label}
-        </li>
-      );
-    });
-  }
-
-  render() {
-    const { itemList } = this.state;
-    if (!itemList) return <Spinner />;
-    const items = this.renderItems(itemList);
+const ItemList = props => {
+  const { data, onItemSelected, children } = props;
+  const items = data.map(item => {
+    const { id } = item;
+    const label = children(item);
     return (
-      <div className="itemList">
-        <ul className="list-group">{items}</ul>
-      </div>
+      <li
+        className="list-group-item"
+        key={id}
+        onClick={() => onItemSelected(id)}
+      >
+        {label}
+      </li>
     );
-  }
-}
+  });
+  return (
+    <div className="itemList">
+      <ul className="list-group">{items}</ul>
+    </div>
+  );
+};
+
+const { getPopularPeople } = new MovieService();
+
+export default withData(ItemList, getPopularPeople);
