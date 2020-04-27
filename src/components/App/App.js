@@ -4,11 +4,7 @@ import Header from "../Header/Header";
 import RandomMovie from "../RandomMovie";
 import ErrorButton from "../ErrorButton";
 import ErrorIndicator from "../ErrorIndicator";
-import MovieService from "../../services/movie-service";
 import ToggleMovie from "../ToggleMovie";
-import ItemDetails from "../ItemDetails";
-import Row from "../Row";
-import { Record } from "../ItemDetails/ItemDetails";
 import {
   PersonDetails,
   MovieDetails,
@@ -22,7 +18,6 @@ export default class App extends Component {
     showRandomMovie: true,
     hasError: false
   };
-  movieService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });
