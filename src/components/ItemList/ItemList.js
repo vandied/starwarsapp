@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import "./ItemList.css";
-import MovieService from "../../services/movie-service";
-import withData from "../HOCHelpers/withData";
 
 const ItemList = props => {
-  const { data, onItemSelected, children } = props;
+  const { data, onItemSelected, children: renderLabel } = props;
   const items = data.map(item => {
     const { id } = item;
-    const label = children(item);
+    const label = renderLabel(item);
     return (
       <li
         className="list-group-item"
@@ -25,6 +23,4 @@ const ItemList = props => {
   );
 };
 
-const { getPopularPeople } = new MovieService();
-
-export default withData(ItemList, getPopularPeople);
+export default ItemList;

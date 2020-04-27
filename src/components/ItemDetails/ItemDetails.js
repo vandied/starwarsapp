@@ -3,7 +3,6 @@ import "./ItemDetails.css";
 import Spinner from "../Spinner";
 
 const Record = ({ item, field, label }) => {
-  console.log(item);
   return (
     <li className="list-group-item">
       <span className="term">{label} </span>

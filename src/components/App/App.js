@@ -9,8 +9,14 @@ import ToggleMovie from "../ToggleMovie";
 import ItemDetails from "../ItemDetails";
 import Row from "../Row";
 import { Record } from "../ItemDetails/ItemDetails";
-import ItemList from "../ItemList/ItemList";
-import PeoplePage from "../PeoplePage";
+import {
+  PersonDetails,
+  MovieDetails,
+  TVDetails,
+  PersonList,
+  MovieList,
+  TVList
+} from "../moviesComponents";
 export default class App extends Component {
   state = {
     showRandomMovie: true,
@@ -31,24 +37,6 @@ export default class App extends Component {
       return <ErrorIndicator />;
     }
     const randomMovie = this.state.showRandomMovie ? <RandomMovie /> : null;
-    const { getPerson, getMovie, getImage } = this.movieService;
-    const personDetails = (
-      <ItemDetails itemId={1910848} getData={getPerson} getImgUrl={getImage}>
-        <Record field="popularity" label="Popularity" />
-        <Record field="gender" label="Gender" />
-        <Record field="birthday" label="Birthday" />
-        <Record field="knownAs" label="Also known as" />
-        <Record field="biography" label="biography" />
-      </ItemDetails>
-    );
-    const movieDetails = (
-      <ItemDetails itemId={2610} getData={getMovie} getImgUrl={getImage}>
-        <Record field="popularity" label="Popularity" />
-        <Record field="overview" label="Overview" />
-        <Record field="homepage" label="Homepage" />
-        <Record field="tagline" label="Tagline" />
-      </ItemDetails>
-    );
     return (
       <div className="app">
         <Header />
@@ -57,8 +45,12 @@ export default class App extends Component {
           <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
           <ErrorButton />
         </div>
-        <PeoplePage />
-        <Row left={personDetails} right={movieDetails} />
+        <PersonDetails itemId={933238} />
+        <MovieDetails itemId={338762} />
+        <TVDetails itemId={63333} />
+        <PersonList>{({ name }) => <span>{name}</span>}</PersonList>
+        <MovieList>{({ title }) => <span>{title}</span>}</MovieList>
+        <TVList>{({ name }) => <span>{name}</span>}</TVList>
       </div>
     );
   }
