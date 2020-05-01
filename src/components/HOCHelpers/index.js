@@ -1,2 +1,3 @@
 import withData from "./withData";
-export { withData };
+import withMovieService from "./withMovieService";
+export { withData, withMovieService };
