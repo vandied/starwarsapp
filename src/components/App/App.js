@@ -16,15 +16,14 @@ import {
 import { MovieServiceProvider } from "../MoviesServiceContext";
 import ErrorBoundary from "../ErrorBoundary";
 import MovieService from "../../services/movie-service";
-// import DummyMovieService from "../../services/dummyMovieService";
+import DummyMovieService from "../../services/dummyMovieService";
 
 export default class App extends Component {
   state = {
     showRandomMovie: true,
-    hasError: false
+    hasError: false,
+    movieService: new MovieService()
   };
-
-  movieService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });
@@ -32,6 +31,15 @@ export default class App extends Component {
 
   onToggleRandomMovie = () => {
     this.setState({ showRandomMovie: !this.state.showRandomMovie });
+  };
+  onServiceChange = () => {
+    this.setState(({ movieService }) => {
+      const Service =
+        movieService instanceof MovieService ? DummyMovieService : MovieService;
+      return {
+        movieService: new Service()
+      };
+    });
   };
 
   render() {
@@ -41,13 +49,13 @@ export default class App extends Component {
     const randomMovie = this.state.showRandomMovie ? <RandomMovie /> : null;
     return (
       <ErrorBoundary>
-        <MovieServiceProvider value={this.movieService}>
+        <MovieServiceProvider value={this.state.movieService}>
           <div className="app">
-            <Header />
+            <Header onServiceChange={this.onServiceChange} />
             {randomMovie}
             <div className="buttonBlock">
               <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
-              <ErrorButton />
+              {/*<ErrorButton />*/}
             </div>
             <PersonDetails itemId={933238} />
             <MovieDetails itemId={338762} />

@@ -10,7 +10,9 @@ const Record = ({ item, field, label }) => {
     </li>
   );
 };
+
 export { Record };
+
 export default class ItemDetails extends Component {
   state = {
     item: null,
@@ -23,7 +25,11 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
+    if (
+      this.props.itemId !== prevProps.itemId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImgUrl !== prevProps.getImgUrl
+    ) {
       this.setState({ item: null, getImgUrl: null });
       this.updateItem();
     }
@@ -38,6 +44,7 @@ export default class ItemDetails extends Component {
       this.setState({ item, image: getImgUrl(item.posterUrl) });
     });
   };
+
   render() {
     const { item, image } = this.state;
     if (!this.state.item) {
