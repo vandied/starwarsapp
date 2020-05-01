@@ -13,11 +13,18 @@ import {
   MovieList,
   TVList
 } from "../moviesComponents";
+import { MovieServiceProvider } from "../MoviesServiceContext";
+import ErrorBoundary from "../ErrorBoundary";
+import MovieService from "../../services/movie-service";
+// import DummyMovieService from "../../services/dummyMovieService";
+
 export default class App extends Component {
   state = {
     showRandomMovie: true,
     hasError: false
   };
+
+  movieService = new MovieService();
 
   componentDidCatch() {
     this.setState({ hasError: true });
@@ -33,20 +40,24 @@ export default class App extends Component {
     }
     const randomMovie = this.state.showRandomMovie ? <RandomMovie /> : null;
     return (
-      <div className="app">
-        <Header />
-        {randomMovie}
-        <div className="buttonBlock">
-          <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
-          <ErrorButton />
-        </div>
-        <PersonDetails itemId={933238} />
-        <MovieDetails itemId={338762} />
-        <TVDetails itemId={63333} />
-        <PersonList>{({ name }) => <span>{name}</span>}</PersonList>
-        <MovieList>{({ title }) => <span>{title}</span>}</MovieList>
-        <TVList>{({ name }) => <span>{name}</span>}</TVList>
-      </div>
+      <ErrorBoundary>
+        <MovieServiceProvider value={this.movieService}>
+          <div className="app">
+            <Header />
+            {randomMovie}
+            <div className="buttonBlock">
+              <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
+              <ErrorButton />
+            </div>
+            <PersonDetails itemId={933238} />
+            <MovieDetails itemId={338762} />
+            <TVDetails itemId={63333} />
+            <PersonList>{({ name }) => <span>{name}</span>}</PersonList>
+            <MovieList>{({ title }) => <span>{title}</span>}</MovieList>
+            <TVList>{({ name }) => <span>{name}</span>}</TVList>
+          </div>
+        </MovieServiceProvider>
+      </ErrorBoundary>
     );
   }
 }
