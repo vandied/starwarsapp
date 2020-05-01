@@ -1,9 +1,7 @@
 import ItemList from "../ItemList";
 import { withData } from "../HOCHelpers";
-import MovieService from "../../services/movie-service";
 import React from "react";
-const movieService = new MovieService();
-const { getPopularMovies, getPopularPeople, getPopularTV } = movieService;
+import { withMovieService } from "../HOCHelpers";
 
 const withChildFunction = (Wrapped, fn) => {
   return props => {
@@ -12,20 +10,44 @@ const withChildFunction = (Wrapped, fn) => {
 };
 
 const renderName = ({ name }) => <span>{name}</span>;
+
 const renderMovieTitle = ({ title, popularity }) => (
   <span>
     {title} ({popularity})
   </span>
 );
 
-const PersonList = withData(
-  withChildFunction(ItemList, renderName),
-  getPopularPeople
+const mapPeopleMethodsToProps = movieService => {
+  return {
+    getData: movieService.getPopularPeople
+  };
+};
+
+const mapTVMethodsToProps = movieService => {
+  return {
+    getData: movieService.getPopularTV
+  };
+};
+
+const mapMoviesMethodsToProps = movieService => {
+  return {
+    getData: movieService.getPopularMovies
+  };
+};
+
+const PersonList = withMovieService(
+  withData(withChildFunction(ItemList, renderName)),
+  mapPeopleMethodsToProps
 );
-const MovieList = withData(
-  withChildFunction(ItemList, renderMovieTitle),
-  getPopularMovies
+
+const MovieList = withMovieService(
+  withData(withChildFunction(ItemList, renderMovieTitle)),
+  mapMoviesMethodsToProps
 );
-const TVList = withData(withChildFunction(ItemList, renderName), getPopularTV);
+
+const TVList = withMovieService(
+  withData(withChildFunction(ItemList, renderName)),
+  mapTVMethodsToProps
+);
 
 export { PersonList, MovieList, TVList };

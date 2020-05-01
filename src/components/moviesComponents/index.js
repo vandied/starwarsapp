@@ -1,6 +1,6 @@
 import PersonDetails from "./PersonDetails";
-import { MovieDetails } from "./movieDetails";
-import { TVDetails } from "./tvDetails";
+import MovieDetails from "./MovieDetails";
+import TVDetails from "./TVDetails";
 
 import { PersonList, MovieList, TVList } from "./itemLists";
 export {
