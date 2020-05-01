@@ -2,22 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import RandomMovie from "../RandomMovie";
-import ErrorButton from "../ErrorButton";
 import ErrorIndicator from "../ErrorIndicator";
-import ToggleMovie from "../ToggleMovie";
-import {
-  PersonDetails,
-  MovieDetails,
-  TVDetails,
-  PersonList,
-  MovieList,
-  TVList
-} from "../moviesComponents";
 import { MovieServiceProvider } from "../MoviesServiceContext";
 import ErrorBoundary from "../ErrorBoundary";
 import MovieService from "../../services/movie-service";
 import DummyMovieService from "../../services/dummyMovieService";
-
+import { MoviesPage, TVPage, PeoplePage } from "../Pages";
 export default class App extends Component {
   state = {
     showRandomMovie: true,
@@ -32,6 +22,7 @@ export default class App extends Component {
   onToggleRandomMovie = () => {
     this.setState({ showRandomMovie: !this.state.showRandomMovie });
   };
+
   onServiceChange = () => {
     this.setState(({ movieService }) => {
       const Service =
@@ -53,16 +44,9 @@ export default class App extends Component {
           <div className="app">
             <Header onServiceChange={this.onServiceChange} />
             {randomMovie}
-            <div className="buttonBlock">
-              <ToggleMovie onToggleRandomMovie={this.onToggleRandomMovie} />
-              {/*<ErrorButton />*/}
-            </div>
-            <PersonDetails itemId={933238} />
-            <MovieDetails itemId={338762} />
-            <TVDetails itemId={63333} />
-            <PersonList>{({ name }) => <span>{name}</span>}</PersonList>
-            <MovieList>{({ title }) => <span>{title}</span>}</MovieList>
-            <TVList>{({ name }) => <span>{name}</span>}</TVList>
+            <MoviesPage />
+            <TVPage />
+            <PeoplePage />
           </div>
         </MovieServiceProvider>
       </ErrorBoundary>
