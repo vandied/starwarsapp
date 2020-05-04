@@ -5,9 +5,14 @@ import Spinner from "../Spinner";
 import ErrorIndicator from "../ErrorIndicator";
 
 export default class RandomMovie extends Component {
+  static defaultProps = {
+    updateInterval: 10000
+  };
+
   componentDidMount() {
+    const { updateInterval } = this.props;
     this.updateMovie();
-    this.interval = setInterval(this.updateMovie, 22500);
+    this.interval = setInterval(this.updateMovie, updateInterval);
   }
 
   componentWillUnmount() {
