@@ -34,7 +34,9 @@ export default class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
-    const randomMovie = this.state.showRandomMovie ? <RandomMovie /> : null;
+    const randomMovie = this.state.showRandomMovie ? (
+      <RandomMovie updateInterval={15000} />
+    ) : null;
     return (
       <ErrorBoundary>
         <MovieServiceProvider value={this.state.movieService}>
