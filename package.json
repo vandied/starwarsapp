@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "husky": "^4.2.3",
+    "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
@@ -20,9 +21,11 @@
     "fix": "prettier --single-quote --tab-width 2  --trailing-comma es5 --write \"src/**/*.{ts,js,json,scss,css,jsx,tsx,html}\""
   },
   "lint-staged": {
-    "src/**/*.js": ["prettier --single-quote --trailing-comma es6 --write",
-    "git add"]},
-
+    "src/**/*.js": [
+      "prettier --single-quote --trailing-comma es6 --write",
+      "git add"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
