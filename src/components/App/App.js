@@ -12,7 +12,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default class App extends Component {
   state = {
-    showRandomMovie: true,
     hasError: false,
     movieService: new MovieService()
   };
@@ -35,9 +34,6 @@ export default class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
-    const randomMovie = this.state.showRandomMovie ? (
-      <RandomMovie updateInterval={15000} />
-    ) : null;
 
     return (
       <ErrorBoundary>
@@ -45,7 +41,7 @@ export default class App extends Component {
           <Router>
             <div className="app">
               <Header onServiceChange={this.onServiceChange} />
-              {randomMovie}
+              <RandomMovie />
               <Route path={"/people"} component={PeoplePage} />
               <Route path={"/tv"} component={TVPage} />
               <Route path={"/movies"} component={MoviesPage} />
