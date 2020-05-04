@@ -8,6 +8,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import MovieService from "../../services/movie-service";
 import DummyMovieService from "../../services/dummyMovieService";
 import { MoviesPage, TVPage, PeoplePage } from "../Pages";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default class App extends Component {
   state = {
@@ -37,16 +38,19 @@ export default class App extends Component {
     const randomMovie = this.state.showRandomMovie ? (
       <RandomMovie updateInterval={15000} />
     ) : null;
+
     return (
       <ErrorBoundary>
         <MovieServiceProvider value={this.state.movieService}>
-          <div className="app">
-            <Header onServiceChange={this.onServiceChange} />
-            {randomMovie}
-            <MoviesPage />
-            <TVPage />
-            <PeoplePage />
-          </div>
+          <Router>
+            <div className="app">
+              <Header onServiceChange={this.onServiceChange} />
+              {randomMovie}
+              <Route path={"/people"} component={PeoplePage} />
+              <Route path={"/tv"} component={TVPage} />
+              <Route path={"/movies"} component={MoviesPage} />
+            </div>
+          </Router>
         </MovieServiceProvider>
       </ErrorBoundary>
     );
