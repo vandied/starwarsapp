@@ -48,13 +48,13 @@ export default class App extends Component {
                 render={() => <h2>Welcome to Movie DB</h2>}
                 exact
               />
-              <Route path="/people" exact component={PeoplePage} />
-              <Route
-                path="/people/:id"
-                render={({ match }) => {
-                  return <PersonDetails itemId={match.params.id} />;
-                }}
-              />
+              <Route path="/people/:id?" exact component={PeoplePage} />
+              {/*<Route*/}
+              {/*  path="/people/:id"*/}
+              {/*  render={({ match }) => {*/}
+              {/*    return <PersonDetails itemId={match.params.id} />;*/}
+              {/*  }}*/}
+              {/*/>*/}
               <Route path="/tv" exact component={TVPage} />
               <Route
                 path="/tv/:id"
