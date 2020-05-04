@@ -1,23 +1,15 @@
-import React, { Component } from "react";
-import Row from "../Row";
-import { TVList, TVDetails } from "../moviesComponents";
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { TVList } from "../moviesComponents";
 
-export default class TVPage extends Component {
-  state = {
-    selectedItem: null
-  };
+const TVPage = ({ history }) => {
+  return (
+    <TVList
+      onItemSelected={itemId => {
+        history.push(`/tv/${itemId}`);
+      }}
+    />
+  );
+};
 
-  onItemSelected = selectedItem => {
-    this.setState({ selectedItem });
-  };
-
-  render() {
-    const { selectedItem } = this.state;
-    return (
-      <Row
-        left={<TVList onItemSelected={this.onItemSelected} />}
-        right={<TVDetails itemId={selectedItem} />}
-      />
-    );
-  }
-}
+export default withRouter(TVPage);

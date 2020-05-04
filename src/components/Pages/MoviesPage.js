@@ -1,23 +1,15 @@
-import React, { Component } from "react";
-import Row from "../Row";
-import { MovieDetails, MovieList } from "../moviesComponents";
+import React from "react";
+import { MovieList } from "../moviesComponents";
+import { withRouter } from "react-router-dom";
 
-export default class MoviesPage extends Component {
-  state = {
-    selectedItem: null
-  };
+const MoviesPage = ({ history }) => {
+  return (
+    <MovieList
+      onItemSelected={itemId => {
+        history.push(`/movies/${itemId}`);
+      }}
+    />
+  );
+};
 
-  onItemSelected = selectedItem => {
-    this.setState({ selectedItem });
-  };
-
-  render() {
-    const { selectedItem } = this.state;
-    return (
-      <Row
-        left={<MovieList onItemSelected={this.onItemSelected} />}
-        right={<MovieDetails itemId={selectedItem} />}
-      />
-    );
-  }
-}
+export default withRouter(MoviesPage);

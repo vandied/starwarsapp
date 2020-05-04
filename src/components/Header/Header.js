@@ -6,7 +6,7 @@ const Header = ({ onServiceChange }) => {
   return (
     <div className="header d-flex">
       <h3>
-        <a href="#/">Movie searching</a>
+        <Link to="/">Movie searching</Link>
       </h3>
       <ul className="d-flex">
         <li>

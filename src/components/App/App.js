@@ -9,6 +9,7 @@ import MovieService from "../../services/movie-service";
 import DummyMovieService from "../../services/dummyMovieService";
 import { MoviesPage, TVPage, PeoplePage } from "../Pages";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { MovieDetails, PersonDetails, TVDetails } from "../moviesComponents";
 
 export default class App extends Component {
   state = {
@@ -42,9 +43,32 @@ export default class App extends Component {
             <div className="app">
               <Header onServiceChange={this.onServiceChange} />
               <RandomMovie />
-              <Route path={"/people"} component={PeoplePage} />
-              <Route path={"/tv"} component={TVPage} />
-              <Route path={"/movies"} component={MoviesPage} />
+              <Route
+                path="/"
+                render={() => <h2>Welcome to Movie DB</h2>}
+                exact
+              />
+              <Route path="/people" exact component={PeoplePage} />
+              <Route
+                path="/people/:id"
+                render={({ match }) => {
+                  return <PersonDetails itemId={match.params.id} />;
+                }}
+              />
+              <Route path="/tv" exact component={TVPage} />
+              <Route
+                path="/tv/:id"
+                render={({ match }) => {
+                  return <TVDetails itemId={match.params.id} />;
+                }}
+              />
+              <Route path="/movies" exact component={MoviesPage} />
+              <Route
+                path="/movies/:id"
+                render={({ match }) => {
+                  return <MovieDetails itemId={match.params.id} />;
+                }}
+              />
             </div>
           </Router>
         </MovieServiceProvider>
