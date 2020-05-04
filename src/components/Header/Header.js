@@ -1,21 +1,22 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = ({ onServiceChange }) => {
   return (
     <div className="header d-flex">
       <h3>
-        <a href="#">Movie searching</a>
+        <a href="#/">Movie searching</a>
       </h3>
       <ul className="d-flex">
         <li>
-          <a href="#">Movies</a>
+          <Link to="/movies">Movies</Link>
         </li>
         <li>
-          <a href="#">TV</a>
+          <Link to="/tv">TV</Link>
         </li>
         <li>
-          <a href="#">People</a>
+          <Link to="/people">People</Link>
         </li>
       </ul>
       <button className="btn btn-primary btn-small" onClick={onServiceChange}>
