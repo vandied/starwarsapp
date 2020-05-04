@@ -8,6 +8,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import MovieService from "../../services/movie-service";
 import DummyMovieService from "../../services/dummyMovieService";
 import { MoviesPage, TVPage, PeoplePage } from "../Pages";
+
 export default class App extends Component {
   state = {
     showRandomMovie: true,
@@ -18,10 +19,6 @@ export default class App extends Component {
   componentDidCatch() {
     this.setState({ hasError: true });
   }
-
-  onToggleRandomMovie = () => {
-    this.setState({ showRandomMovie: !this.state.showRandomMovie });
-  };
 
   onServiceChange = () => {
     this.setState(({ movieService }) => {

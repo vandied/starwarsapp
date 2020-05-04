@@ -3,6 +3,7 @@ import "./ItemList.css";
 
 const ItemList = props => {
   const { data, onItemSelected, children: renderLabel } = props;
+
   const items = data.map(item => {
     const { id } = item;
     const label = renderLabel(item);
@@ -16,6 +17,7 @@ const ItemList = props => {
       </li>
     );
   });
+
   return (
     <div className="itemList">
       <ul className="list-group">{items}</ul>
