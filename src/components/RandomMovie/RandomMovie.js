@@ -3,6 +3,7 @@ import "./RandomMovie.css";
 import MovieService from "../../services/movie-service";
 import Spinner from "../Spinner";
 import ErrorIndicator from "../ErrorIndicator";
+import PropTypes from "prop-types";
 
 export default class RandomMovie extends Component {
   static defaultProps = {
@@ -10,13 +11,7 @@ export default class RandomMovie extends Component {
   };
 
   static propTypes = {
-    updateInterval: (props, propName, componentName) => {
-      const value = props[propName];
-      if (typeof value === "number" && !isNaN(value)) {
-        return null;
-      }
-      return new TypeError(`${componentName}: ${propName} must  be number`);
-    }
+    updateInterval: PropTypes.number
   };
 
   componentDidMount() {
