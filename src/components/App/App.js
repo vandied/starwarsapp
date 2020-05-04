@@ -7,14 +7,19 @@ import { MovieServiceProvider } from "../MoviesServiceContext";
 import ErrorBoundary from "../ErrorBoundary";
 import MovieService from "../../services/movie-service";
 import DummyMovieService from "../../services/dummyMovieService";
-import { MoviesPage, TVPage, PeoplePage } from "../Pages";
+import { MoviesPage, PeoplePage, SecretPage, LoginPage } from "../Pages";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { MovieDetails, PersonDetails, TVDetails } from "../moviesComponents";
+import { MovieDetails, TVDetails } from "../moviesComponents";
 
 export default class App extends Component {
   state = {
     hasError: false,
-    movieService: new MovieService()
+    movieService: new MovieService(),
+    isLoggedIn: false
+  };
+
+  onLogin = () => {
+    this.setState({ isLoggedIn: true });
   };
 
   componentDidCatch() {
@@ -35,7 +40,7 @@ export default class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
-
+    const { isLoggedIn } = this.state;
     return (
       <ErrorBoundary>
         <MovieServiceProvider value={this.state.movieService}>
@@ -49,13 +54,6 @@ export default class App extends Component {
                 exact
               />
               <Route path="/people/:id?" exact component={PeoplePage} />
-              {/*<Route*/}
-              {/*  path="/people/:id"*/}
-              {/*  render={({ match }) => {*/}
-              {/*    return <PersonDetails itemId={match.params.id} />;*/}
-              {/*  }}*/}
-              {/*/>*/}
-              <Route path="/tv" exact component={TVPage} />
               <Route
                 path="/tv/:id"
                 render={({ match }) => {
@@ -67,6 +65,20 @@ export default class App extends Component {
                 path="/movies/:id"
                 render={({ match }) => {
                   return <MovieDetails itemId={match.params.id} />;
+                }}
+              />
+              <Route
+                path="/login"
+                render={() => {
+                  return (
+                    <LoginPage isLoginIn={isLoggedIn} onLogin={this.onLogin} />
+                  );
+                }}
+              />
+              <Route
+                path={"/secret"}
+                render={() => {
+                  return <SecretPage isLoginIn={isLoggedIn} />;
                 }}
               />
             </div>
