@@ -7,8 +7,14 @@ import { MovieServiceProvider } from "../MoviesServiceContext";
 import ErrorBoundary from "../ErrorBoundary";
 import MovieService from "../../services/movie-service";
 import DummyMovieService from "../../services/dummyMovieService";
-import { MoviesPage, PeoplePage, SecretPage, LoginPage } from "../Pages";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  MoviesPage,
+  PeoplePage,
+  SecretPage,
+  LoginPage,
+  TVPage
+} from "../Pages";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MovieDetails, TVDetails } from "../moviesComponents";
 
 export default class App extends Component {
@@ -48,39 +54,46 @@ export default class App extends Component {
             <div className="app">
               <Header onServiceChange={this.onServiceChange} />
               <RandomMovie />
-              <Route
-                path="/"
-                render={() => <h2>Welcome to Movie DB</h2>}
-                exact
-              />
-              <Route path="/people/:id?" exact component={PeoplePage} />
-              <Route
-                path="/tv/:id"
-                render={({ match }) => {
-                  return <TVDetails itemId={match.params.id} />;
-                }}
-              />
-              <Route path="/movies" exact component={MoviesPage} />
-              <Route
-                path="/movies/:id"
-                render={({ match }) => {
-                  return <MovieDetails itemId={match.params.id} />;
-                }}
-              />
-              <Route
-                path="/login"
-                render={() => {
-                  return (
-                    <LoginPage isLoginIn={isLoggedIn} onLogin={this.onLogin} />
-                  );
-                }}
-              />
-              <Route
-                path={"/secret"}
-                render={() => {
-                  return <SecretPage isLoginIn={isLoggedIn} />;
-                }}
-              />
+              <Switch>
+                <Route
+                  path="/"
+                  render={() => <h2>Welcome to Movie DB</h2>}
+                  exact
+                />
+                <Route path="/people/:id?" exact component={PeoplePage} />
+                <Route path="/tv" exact component={TVPage} />
+                <Route
+                  path="/tv/:id"
+                  render={({ match }) => {
+                    return <TVDetails itemId={match.params.id} />;
+                  }}
+                />
+                <Route path="/movies" exact component={MoviesPage} />
+                <Route
+                  path="/movies/:id"
+                  render={({ match }) => {
+                    return <MovieDetails itemId={match.params.id} />;
+                  }}
+                />
+                <Route
+                  path="/login"
+                  render={() => {
+                    return (
+                      <LoginPage
+                        isLoginIn={isLoggedIn}
+                        onLogin={this.onLogin}
+                      />
+                    );
+                  }}
+                />
+                <Route
+                  path={"/secret"}
+                  render={() => {
+                    return <SecretPage isLoginIn={isLoggedIn} />;
+                  }}
+                />
+                <Route render={() => <h2>Page not found</h2>} />
+              </Switch>
             </div>
           </Router>
         </MovieServiceProvider>
